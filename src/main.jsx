@@ -14,7 +14,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Index />,
-        loader: clientesLoader,
+        loader: clientesLoader, //Asociamos el Loader
       },
       {
         path: '/clientes/nuevo',
