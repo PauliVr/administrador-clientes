@@ -1,11 +1,12 @@
 import { Form, useNavigate } from 'react-router-dom';
 import Formulario from '../components/Formulario';
 
-// 2 creamos la funcion de action que hará referencia al action al enviar el formulario 
-export function action(){
-  console.log('sumbit al formulario...');
+// 2 creamos la función de action que hará referencia al action al enviar el formulario
+export async function action({ request }) {
+  const formData = await request.formData();
+  const datos = Object.fromEntries(formData);
+  console.log(datos);
 }
-
 
 function NuevoCliente() {
   const navigate = useNavigate();
