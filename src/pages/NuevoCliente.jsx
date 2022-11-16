@@ -1,15 +1,38 @@
-import { Form, useNavigate } from 'react-router-dom';
+import { Form, useActionData, useNavigate } from 'react-router-dom';
 import Formulario from '../components/Formulario';
+import Error from '../components/Error';
 
 // 2 creamos la función de action que hará referencia al action al enviar el formulario
 export async function action({ request }) {
   const formData = await request.formData();
   const datos = Object.fromEntries(formData);
-  console.log(datos);
+
+  //validación de email
+  const email = formData.get('email');
+
+  //Validación
+  const errores = [];
+  if (Object.values(datos).includes('')) {
+    errores.push('Todos los campos son obligatorios');
+  }
+
+  let regex = new RegExp(
+    "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])"
+  );
+
+  if (!regex.test(email)) {
+    errores.push('El email no es valido');
+  }
+
+  //Retornar datos si hay errores
+  if (Object.keys(errores).length) {
+    return errores;
+  }
 }
 
 function NuevoCliente() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //loader
+  const errores = useActionData(); //action
 
   return (
     <>
@@ -26,8 +49,10 @@ function NuevoCliente() {
       </div>
 
       <div className='bg-white shadow rounded-md md:w-3/4 mx-auto px-5 py-10 mt-20'>
-        {/*1 para usar Form de react router dom importamos el componente, y le pasamos su metodo y action */}
-        <Form method='post' action=''>
+        {errores?.length && errores.map((error, i) => <Error key={i}>{error}</Error>)}
+
+        {/*1 para usar Form de react router dom importamos el componente, y le pasamos su método y action */}
+        <Form method='post' noValidate>
           <Formulario />
           <input
             type='submit'
