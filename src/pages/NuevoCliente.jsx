@@ -1,5 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import Formulario from '../components/Formulario';
+
+// 2 creamos la funcion de action que hará referencia al action al enviar el formulario 
+export function action(){
+  console.log('sumbit al formulario...');
+}
+
 
 function NuevoCliente() {
   const navigate = useNavigate();
@@ -19,14 +25,15 @@ function NuevoCliente() {
       </div>
 
       <div className='bg-white shadow rounded-md md:w-3/4 mx-auto px-5 py-10 mt-20'>
-        <form>
+        {/*1 para usar Form de react router dom importamos el componente, y le pasamos su metodo y action */}
+        <Form method='post' action=''>
           <Formulario />
           <input
             type='submit'
             className='mt-5 w-full bg-blue-800 p-3 uppercase font-bold text-white text-lg'
             value='registrar cliente'
           />
-        </form>
+        </Form>
       </div>
     </>
   );
