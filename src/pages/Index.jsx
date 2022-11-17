@@ -12,6 +12,9 @@ function Index() {
   // Recuperamos Loader
   const clientes = useLoaderData();
 
+  // Error Boundaries -> componentes de React que obtienen los errores en cualquier lugar del componente
+  // Muestran los errores cuando ocurren y una interfaz en lugar del componente que causo el error
+
   return (
     <>
       <h1 className='font-black text-4xl text-blue-900'>Clientes</h1>
