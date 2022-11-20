@@ -1,12 +1,12 @@
-import { Form, useActionData, useNavigate } from 'react-router-dom';
+import { Form, redirect, useActionData, useNavigate } from 'react-router-dom';
 import Formulario from '../components/Formulario';
 import Error from '../components/Error';
+import { agregarCliente } from '../data/clientes';
 
 // 2 creamos la función de action que hará referencia al action al enviar el formulario
 export async function action({ request }) {
   const formData = await request.formData();
   const datos = Object.fromEntries(formData);
-
   //validación de email
   const email = formData.get('email');
 
@@ -28,6 +28,9 @@ export async function action({ request }) {
   if (Object.keys(errores).length) {
     return errores;
   }
+
+  await agregarCliente(datos);
+  return redirect('/');
 }
 
 function NuevoCliente() {
