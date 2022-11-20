@@ -34,6 +34,14 @@
       "telefono": 1398198938,
       "email": "pedro@juan.com",
       "empresa": "Codigo Con Juan"
+    },
+    {
+      "nombre": "Paulette",
+      "empresa": "GoNet",
+      "email": "paulissagameplay@gmail.com",
+      "telefono": "5532013065",
+      "notas": "El cliente solicita el desarrollo de un ecommerce\n",
+      "id": 6
     }
   ]
 }
